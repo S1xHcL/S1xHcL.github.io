@@ -354,6 +354,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/03/%E5%AF%B9%E6%9F%90BC%E7%AB%99%E7%9A%84%E4%B8%80%E6%AC%A1%E4%B8%8D%E5%AE%8C%E6%95%B4%E6%B8%97%E9%80%8F/" >
+            
+                <span>对某BC站的一次不完整渗透</span>
+        </a>
+        <div class="abstract-content">
+            概述目标环境为ThinkPHP v3.2.3,存在注入点报错注入（权限较低）但是无法用sqlmap跑，，改用手注得数据登录后台，想通过登录后台寻找其他上传点等getshell。但目前还仍那些，所以先记录下来，等随后继续做。
+目标环境
+从主站找到了活动页，通过报错看到了是ThinkPHP v3.2.3，也得到了网站的绝对路径等信息
+
+/index.php?s=1
+
+
+初步尝试tp3的站没有RCE，我们得从日志、SQL注入、web页面等地方下手
+
+不存在tp3框架的SQL注入，但扫到了2月份的日志文件，我们一边看目前扫到的日志文件，一边再扫描1月份的日志
+
+1月份扫出来了大量的日志文件，通过...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/03</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "ThinkPHP">ThinkPHP</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2021/02/02/%E5%B8%B8%E8%A7%81CMS%E5%90%8E%E5%8F%B0%E6%94%B6%E9%9B%86/" >
             
                 <span>常见CMS后台收集</span>
@@ -646,9 +686,18 @@ Run server1$ hexo s...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 5
+        Total : 6
         </div>
         <!-- search  -->
         
@@ -661,6 +710,11 @@ Run server1$ hexo s...
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/03</span><a class="archive-post-title" href= "/2021/02/03/%E5%AF%B9%E6%9F%90BC%E7%AB%99%E7%9A%84%E4%B8%80%E6%AC%A1%E4%B8%8D%E5%AE%8C%E6%95%B4%E6%B8%97%E9%80%8F/" >对某BC站的一次不完整渗透</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -701,17 +755,19 @@ Run server1$ hexo s...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="InterView"><span class="iconfont-archer">&#xe606;</span>InterView</span>
+    
         <span class="sidebar-tag-name" data-tags="Windows"><span class="iconfont-archer">&#xe606;</span>Windows</span>
     
         <span class="sidebar-tag-name" data-tags="CVE"><span class="iconfont-archer">&#xe606;</span>CVE</span>
     
-        <span class="sidebar-tag-name" data-tags="InterView"><span class="iconfont-archer">&#xe606;</span>InterView</span>
+        <span class="sidebar-tag-name" data-tags="Pentest"><span class="iconfont-archer">&#xe606;</span>Pentest</span>
     
         <span class="sidebar-tag-name" data-tags="sqlmap"><span class="iconfont-archer">&#xe606;</span>sqlmap</span>
     
         <span class="sidebar-tag-name" data-tags="learn"><span class="iconfont-archer">&#xe606;</span>learn</span>
     
-        <span class="sidebar-tag-name" data-tags="Pentest"><span class="iconfont-archer">&#xe606;</span>Pentest</span>
+        <span class="sidebar-tag-name" data-tags="ThinkPHP"><span class="iconfont-archer">&#xe606;</span>ThinkPHP</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -746,15 +802,15 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
+        <span class="sidebar-category-name" data-categories="learn"><span class="iconfont-archer">&#xe60a;</span>learn</span>
+    
         <span class="sidebar-category-name" data-categories="CVE"><span class="iconfont-archer">&#xe60a;</span>CVE</span>
     
-        <span class="sidebar-category-name" data-categories="learn"><span class="iconfont-archer">&#xe60a;</span>learn</span>
+        <span class="sidebar-category-name" data-categories="Pentest"><span class="iconfont-archer">&#xe60a;</span>Pentest</span>
     
         <span class="sidebar-category-name" data-categories="tools"><span class="iconfont-archer">&#xe60a;</span>tools</span>
     
         <span class="sidebar-category-name" data-categories="CVE/EXP"><span class="iconfont-archer">&#xe60a;</span>CVE/EXP</span>
-    
-        <span class="sidebar-category-name" data-categories="Pentest"><span class="iconfont-archer">&#xe60a;</span>Pentest</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
