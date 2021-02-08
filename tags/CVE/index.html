@@ -354,6 +354,44 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/CVE-2020-17518-17519%E5%A4%8D%E7%8E%B0/" >
+            
+                <span>CVE-2020-17518/17519复现</span>
+        </a>
+        <div class="abstract-content">
+            漏洞描述Flink 1.5.1引入了REST API，但其实现上存在多处缺陷，导致目录遍历和任意文件写入漏洞。
+CVE-2020-17518通过构造恶意的HTTP Header，可实现远程文件写入
+CVE-2020-17519攻击者可通过REST API使用../跳目录实现系统任意文件读取
+影响版本CVE-2020-17518Apache Flink 1.5.1 ~ 1.11.2
+CVE-2020-17519Apache Flink 1.11.0、1.11.1、1.11.2
+FOFA
+app=”Apache-Flink”
+
+安装环境直接vulhub拉取，启动环境
+1docker-comp...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CVE">CVE</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/09/09/CVE-2019-0708-%E5%A4%8D%E7%8E%B0/" >
             
                 <span>CVE-2019-0708 复现</span>
@@ -520,9 +558,22 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 6
+        Total : 7
         </div>
         <!-- search  -->
         
@@ -535,6 +586,11 @@
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/CVE-2020-17518-17519%E5%A4%8D%E7%8E%B0/" >CVE-2020-17518/17519复现</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -580,19 +636,19 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="InterView"><span class="iconfont-archer">&#xe606;</span>InterView</span>
-    
         <span class="sidebar-tag-name" data-tags="Windows"><span class="iconfont-archer">&#xe606;</span>Windows</span>
     
         <span class="sidebar-tag-name" data-tags="CVE"><span class="iconfont-archer">&#xe606;</span>CVE</span>
     
-        <span class="sidebar-tag-name" data-tags="Pentest"><span class="iconfont-archer">&#xe606;</span>Pentest</span>
+        <span class="sidebar-tag-name" data-tags="InterView"><span class="iconfont-archer">&#xe606;</span>InterView</span>
     
         <span class="sidebar-tag-name" data-tags="sqlmap"><span class="iconfont-archer">&#xe606;</span>sqlmap</span>
     
         <span class="sidebar-tag-name" data-tags="learn"><span class="iconfont-archer">&#xe606;</span>learn</span>
     
         <span class="sidebar-tag-name" data-tags="ThinkPHP"><span class="iconfont-archer">&#xe606;</span>ThinkPHP</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pentest"><span class="iconfont-archer">&#xe606;</span>Pentest</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -627,15 +683,15 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="learn"><span class="iconfont-archer">&#xe60a;</span>learn</span>
-    
         <span class="sidebar-category-name" data-categories="CVE"><span class="iconfont-archer">&#xe60a;</span>CVE</span>
     
-        <span class="sidebar-category-name" data-categories="Pentest"><span class="iconfont-archer">&#xe60a;</span>Pentest</span>
+        <span class="sidebar-category-name" data-categories="CVE/EXP"><span class="iconfont-archer">&#xe60a;</span>CVE/EXP</span>
+    
+        <span class="sidebar-category-name" data-categories="learn"><span class="iconfont-archer">&#xe60a;</span>learn</span>
     
         <span class="sidebar-category-name" data-categories="tools"><span class="iconfont-archer">&#xe60a;</span>tools</span>
     
-        <span class="sidebar-category-name" data-categories="CVE/EXP"><span class="iconfont-archer">&#xe60a;</span>CVE/EXP</span>
+        <span class="sidebar-category-name" data-categories="Pentest"><span class="iconfont-archer">&#xe60a;</span>Pentest</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
