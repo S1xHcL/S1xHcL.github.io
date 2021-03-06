@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://s1xhcl.github.io/categories/CVE/EXP/index.html">
+<meta property="og:url" content="https://s1xhcl.github.io/categories/C/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="S1xHcL">
@@ -354,64 +354,29 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/09/CVE-2020-17518-17519%E5%A4%8D%E7%8E%B0/" >
+        <a class="abstract-title" href = "/2021/02/22/C-Notes/" >
             
-                <span>CVE-2020-17518/17519复现</span>
+                <span>C_Notes</span>
         </a>
         <div class="abstract-content">
-            漏洞描述Flink 1.5.1引入了REST API，但其实现上存在多处缺陷，导致目录遍历和任意文件写入漏洞。
-CVE-2020-17518通过构造恶意的HTTP Header，可实现远程文件写入
-CVE-2020-17519攻击者可通过REST API使用../跳目录实现系统任意文件读取
-影响版本CVE-2020-17518Apache Flink 1.5.1 ~ 1.11.2
-CVE-2020-17519Apache Flink 1.11.0、1.11.1、1.11.2
-FOFA
-app=”Apache-Flink”
-
-安装环境直接vulhub拉取，启动环境
-1docker-comp...
+            常量字面常量1int num &#x3D; 10;
+constconst常属性
+12int const num &#x3D; 10;const int num &#x3D; 10;
+#define#define定义的标识符常量
+12345678#include&lt;stdio.h&gt;#define MAX 10int main()&#123;	printf(&quot;%d\n&quot;, MAX);	return 0;&#125;
+enum枚举关键 enumMALE,FEMALE,SECRET为枚举常量
+12345678910111213141516#include&lt;st...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/22</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CVE">CVE</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/09/09/CVE-2019-0708-%E5%A4%8D%E7%8E%B0/" >
-            
-                <span>CVE-2019-0708 复现</span>
-        </a>
-        <div class="abstract-content">
-            0x01 概要上周末更新 CVE-2019-0708 ， 经过踩坑现在可以对特定机器进行攻击
-0x02 影响范围12345678910Exploit targets:   Id  Name   --  ----   0   Automatic targeting via fingerprinting   1   Windows 7 SP1 &#x2F; 2008 R2 (6.1.7601 x64)   2   Windows 7 SP1 &#x2F; 2008 R2 (6.1.7601 x64 - Virtualbox)   3   Windows 7 SP1 &#x2F; 2008 R...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Windows">Windows</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CVE">CVE</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "code">code</a>
     
 </div>
             
