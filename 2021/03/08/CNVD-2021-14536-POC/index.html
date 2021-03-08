@@ -20,24 +20,25 @@
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="常量字面常量1int num &#x3D; 10; constconst常属性 12int const num &#x3D; 10;const int num &#x3D; 10; #define#define定义的标识符常量 12345678#include&lt;stdio.h&gt;#define MAX 10int main()&amp;#123;	printf(&quot;%d\n&quot;,">
+    <meta name="description" content="说明锐捷RG-UAC统一上网行为管理审计系统前台存在账号密码信息泄露,可以间接获取用户账号密码信息登录后台 指纹 title&#x3D;”RG-UAC登录页面” &amp;&amp; body&#x3D;”admin”   使用python3 RG_UAC_admin_passwd.py，指定待检测文件路径  POC地址：https:&#x2F;&#x2F;github.com&#x2F;S1xHcL&#x2F;CNVD-2021-14536 引用锐捷RG">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C_Notes">
-<meta property="og:url" content="https://s1xhcl.github.io/2021/02/22/C-Notes/index.html">
+<meta property="og:title" content="CNVD-2021-14536-POC">
+<meta property="og:url" content="https://s1xhcl.github.io/2021/03/08/CNVD-2021-14536-POC/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="常量字面常量1int num &#x3D; 10; constconst常属性 12int const num &#x3D; 10;const int num &#x3D; 10; #define#define定义的标识符常量 12345678#include&lt;stdio.h&gt;#define MAX 10int main()&amp;#123;	printf(&quot;%d\n&quot;,">
+<meta property="og:description" content="说明锐捷RG-UAC统一上网行为管理审计系统前台存在账号密码信息泄露,可以间接获取用户账号密码信息登录后台 指纹 title&#x3D;”RG-UAC登录页面” &amp;&amp; body&#x3D;”admin”   使用python3 RG_UAC_admin_passwd.py，指定待检测文件路径  POC地址：https:&#x2F;&#x2F;github.com&#x2F;S1xHcL&#x2F;CNVD-2021-14536 引用锐捷RG">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s1xhcl.github.io/2021/02/22/C-Notes/1.png">
-<meta property="article:published_time" content="2021-02-22T02:17:31.000Z">
-<meta property="article:modified_time" content="2021-03-06T02:41:32.426Z">
+<meta property="og:image" content="https://s1xhcl.github.io/2021/03/08/CNVD-2021-14536-POC/1.png">
+<meta property="og:image" content="https://s1xhcl.github.io/2021/03/08/CNVD-2021-14536-POC/2.png">
+<meta property="article:published_time" content="2021-03-08T15:12:39.000Z">
+<meta property="article:modified_time" content="2021-03-08T15:16:50.973Z">
 <meta property="article:author" content="S1xHcL">
-<meta property="article:tag" content="code">
+<meta property="article:tag" content="CVE">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s1xhcl.github.io/2021/02/22/C-Notes/1.png">
+<meta name="twitter:image" content="https://s1xhcl.github.io/2021/03/08/CNVD-2021-14536-POC/1.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>C_Notes · S1xHcL&#39;s Blog</title>
+    <title>CNVD-2021-14536-POC · S1xHcL&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -232,7 +233,7 @@
                 <a href="/" >S1xHcL&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">C_Notes</a>
+                <a href="#" class="post-name">CNVD-2021-14536-POC</a>
             </div>
     </div>
     
@@ -262,7 +263,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            C_Notes
+            CNVD-2021-14536-POC
             <!-- 404 -->
             
         </h1>
@@ -281,18 +282,18 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "code">code</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CVE">CVE</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">198</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">116</span>Reading time: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2021/02/22</span>
+                    <span class="post-intro-time">2021/03/08</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -416,27 +417,24 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><h2 id="字面常量"><a href="#字面常量" class="headerlink" title="字面常量"></a>字面常量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int num &#x3D; 10;</span><br></pre></td></tr></table></figure>
-<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p><code>const</code>常属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int const num &#x3D; 10;</span><br><span class="line">const int num &#x3D; 10;</span><br></pre></td></tr></table></figure>
-<h2 id="define"><a href="#define" class="headerlink" title="#define"></a>#define</h2><p><code>#define</code>定义的标识符常量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#define MAX 10</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	printf(&quot;%d\n&quot;, MAX);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h2><p>枚举关键 <code>enum</code><br><code>MALE,FEMALE,SECRET</code>为枚举常量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">enum Sex</span><br><span class="line">&#123;</span><br><span class="line">	MALE,</span><br><span class="line">	FEMALE,</span><br><span class="line">	SECRET</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	printf(&quot;%d\n&quot;, MALE);</span><br><span class="line">	printf(&quot;%d\n&quot;, FEMALE);</span><br><span class="line">	printf(&quot;%d\n&quot;, SECRET);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="1.png"></p>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char arr1[] &#x3D; &quot;abc&quot;;</span><br><span class="line">	printf(&quot;%s\n&quot;, arr1);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>&quot;abc&quot;</code> –&gt;  ‘a’,’b’,’c’ 字符串结束标志为 <code>\0</code>，在计算字符串长度的时候，不算做字符串内容</p>
-<h1 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h1><h2 id="while"><a href="#while" class="headerlink" title="while"></a>while</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while(num &lt; 200)</span><br><span class="line">&#123;</span><br><span class="line">	num +&#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line">print(&quot;exit&quot;);</span><br></pre></td></tr></table></figure>
-<h2 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for(i&#x3D;0; i+1; i&lt;100)</span><br></pre></td></tr></table></figure>
-<h2 id="do…while语句"><a href="#do…while语句" class="headerlink" title="do…while语句"></a>do…while语句</h2><h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1>
+        <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>锐捷RG-UAC统一上网行为管理审计系统前台存在账号密码信息泄露,可以间接获取用户账号密码信息登录后台</p>
+<h1 id="指纹"><a href="#指纹" class="headerlink" title="指纹"></a>指纹</h1><blockquote>
+<p>title=”RG-UAC登录页面” &amp;&amp; body=”admin”</p>
+</blockquote>
+<p><img src="1.png" alt="1.png"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p><code>python3 RG_UAC_admin_passwd.py</code>，指定待检测文件路径</p>
+<p><img src="2.png" alt="1.png"></p>
+<p>POC地址：<a target="_blank" rel="noopener" href="https://github.com/S1xHcL/CNVD-2021-14536">https://github.com/S1xHcL/CNVD-2021-14536</a></p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/LbSPzt__mKdNN83RhJ2bwA">锐捷RG-UAC统一上网行为管理审计系统账号密码信息泄露漏洞 CNVD-2021-14536</a></p>
+
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="https://s1xhcl.github.io">S1xHcL</a>
-            <p>原文链接：<a href="https://s1xhcl.github.io/2021/02/22/C-Notes/">https://s1xhcl.github.io/2021/02/22/C-Notes/</a>
-            <p>发表日期：<a href="https://s1xhcl.github.io/2021/02/22/C-Notes/">February 22nd 2021, 10:17:31 am</a>
-            <p>更新日期：<a href="https://s1xhcl.github.io/2021/02/22/C-Notes/">March 6th 2021, 10:41:32 am</a>
+            <p>原文链接：<a href="https://s1xhcl.github.io/2021/03/08/CNVD-2021-14536-POC/">https://s1xhcl.github.io/2021/03/08/CNVD-2021-14536-POC/</a>
+            <p>发表日期：<a href="https://s1xhcl.github.io/2021/03/08/CNVD-2021-14536-POC/">March 8th 2021, 11:12:39 pm</a>
+            <p>更新日期：<a href="https://s1xhcl.github.io/2021/03/08/CNVD-2021-14536-POC/">March 8th 2021, 11:16:50 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -444,17 +442,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2021/03/02/Interview2/" title= "Interview2">
-                    <div class="nextTitle">Interview2</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2021/02/09/CVE-2020-17518-17519%E5%A4%8D%E7%8E%B0/" title= "CVE-2020-17518/17519复现">
-                    <div class="prevTitle">CVE-2020-17518/17519复现</div>
+                <a href= "/2021/03/07/Interview3/" title= "Interview3.md">
+                    <div class="prevTitle">Interview3.md</div>
                 </a>
             
         </li>
@@ -562,7 +555,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">常量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E5%B8%B8%E9%87%8F"><span class="toc-number">1.1.</span> <span class="toc-text">字面常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-number">1.2.</span> <span class="toc-text">const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#define"><span class="toc-number">1.3.</span> <span class="toc-text">#define</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#enum"><span class="toc-number">1.4.</span> <span class="toc-text">enum</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.</span> <span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#while"><span class="toc-number">3.1.</span> <span class="toc-text">while</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.2.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do%E2%80%A6while%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.3.</span> <span class="toc-text">do…while语句</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">函数</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E7%BA%B9"><span class="toc-number">2.</span> <span class="toc-text">指纹</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">引用</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
