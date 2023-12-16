@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://s1xhcl.github.io/tags/Learn/index.html">
+<meta property="og:url" content="https://s1xhcl.github.io/tags/learn/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="S1xHcL">
@@ -354,31 +354,356 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2023/03/16/Nacos-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" >
+        <a class="abstract-title" href = "/2022/12/29/ThinkPHP-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" >
             
-                <span>Nacos 身份认证绕过漏洞复现</span>
+                <span>ThinkPHP 代码审计学习记录</span>
         </a>
         <div class="abstract-content">
-            漏洞背景开源服务管理平台 Nacos在默认配置下未对 token.secret.key 进行修改，导致远程攻击者可以绕过密钥认证进入后台，造成系统受控等后果。
-漏洞范围
-nacos &lt;= 2.2.0.1
+            Thinkphp 5.0.x SQL注入-select方法漏洞概述官方不认为是漏洞，因在特定模式 exp 下执行 SQL 语句，未经任何过滤处理导致注入
+影响版本
+ThinkPHP5 全版本
 
-漏洞复现环境
-nacos 2.2.0
+需要开启 Debug 页面
 
-环境搭建选择 docker 直接拉取
-12docker pull nacos&#x2F;nacos-server:v2.2.0docker run -d --name nacos -p 8848:8848 -e PREFER_HOST_MODE&#x3D;hostname -e MODE&#x3D;standalone nacos&#x2F...
+
+环境搭建拉取项目
+1composer create-project --prefer-dist topthink&#x2F;think&#x3D;5.0.10 thinkphp_5.0.10
+修改 composer.json 文件的 require 字段设置成如下，然后再执行 composer update
+1234&quot;require&quot;: &#12...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/03/16</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/29</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Learn">Learn</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "ThinkPHP">ThinkPHP</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2022/10/18/CNVD-2022-42853-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/" >
+            
+                <span>CNVD-2022-42853-漏洞分析</span>
+        </a>
+        <div class="abstract-content">
+            漏洞背景禅道16.5 的版本未对输入的 account 参数内容作过滤校验，攻击者通过漏洞可以获取数据库敏感信息。
+漏洞复现环境
+PHP 5.6.27
+Apache 2.4.23
+禅道 16.5
+
+环境搭建漏洞复现123456789101112131415161718POST &#x2F;zentaopms&#x2F;www&#x2F;index.php?m&#x3D;user&amp;f&#x3D;login&amp;t&#x3D;html HTTP&#x2F;1.1Host: 127.0.0.1User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/10/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2022/10/18/PHP-Audit-Day12-%E8%AF%AF%E7%94%A8htmlentities%E5%87%BD%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%BC%8F%E6%B4%9E/" >
+            
+                <span>PHP-Audit Day12 误用htmlentities函数引发的漏洞</span>
+        </a>
+        <div class="abstract-content">
+            函数学习
+htmlentities — 将字符转换为 HTML 转义字符
+1string htmlentities ( string $string [, int $flags = ENT_COMPAT | ENT_HTML401 [, string $encoding = ini_get(&quot;default_charset&quot;) [, bool $double_encode = true ]]] )
+
+作用：在写PHP代码时，不能在字符串中直接写实体字符，PHP提供了一个将HTML特殊字符转换成实体字符的函数 htmlentities()。
+
+注：htmlentitie...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/10/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2022/10/11/PHP-Audit-Day11-unserialize%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" >
+            
+                <span>PHP-Audit Day11 unserialize反序列化漏洞</span>
+        </a>
+        <div class="abstract-content">
+            函数学习
+unserialize
+功能 ：unserialize() 函数用于将通过 serialize() 函数序列化后的对象或数组进行反序列化，并返回原始的对象结构。
+定义 ：mixed unserialize ( string $str )
+
+Demo学习1234567891011121314151617181920212223242526272829303132333435&lt;?phpclass Template &#123;    public $cacheFile = &#x27;./cachefile&#x27;;    public $template = &#x27...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/10/11</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2022/04/30/Apache-Struts%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E5%AD%A6%E4%B9%A0-S2-062/" >
+            
+                <span>Apache Struts漏洞分析学习-S2-062</span>
+        </a>
+        <div class="abstract-content">
+            前言缝合怪文章，刚接触Java，尝试分析和学习漏洞的原理
+漏洞背景2022年4月12日，Apache发布安全公告，修复了一个Apache Struts2 中的远程代码执行漏洞S2-062(CVE-2021-31805)，攻击者可以利用此漏洞来控制受影响的系统。该漏洞是由于 2020 年 S2-061(CVE-2020-17530)  的不完整修复造成的，当开发人员使用了 %&#123;…&#125; 语法进行强制 OGNL 解析时，仍有一些特殊的 TAG 属性可被二次解析，攻击者可构造恶意的 OGNL表达式 触发漏洞，从而实现远程代码执行。
+影响范围
+2.0.0 &lt;= Apache...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/30</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Struts">Struts</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2022/04/10/PHP-Audit-Day10-%E7%A8%8B%E5%BA%8F%E6%9C%AA%E6%81%B0%E5%BD%93exit%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" >
+            
+                <span>PHP-Audit Day10 程序未恰当exit导致的问题</span>
+        </a>
+        <div class="abstract-content">
+            函数学习
+ extract  ：(PHP 4, PHP 5, PHP 7)
+功能 ：从数组中将变量导入到当前的符号表
+定义 ： int extract ( array &amp;$array [, int $flags = EXTR_OVERWRITE [, string $prefix = NULL ]] ) 
+
+Demo学习123456789101112131415161718&lt;?phpextract($_POST);function goAway() &#123;    error_log(&quot;Hacking attempt.&quot;);    header(&#...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2022/04/03/PHP-Audit-Day09-str-replace-%E5%87%BD%E6%95%B0%E8%BF%87%E6%BB%A4%E4%B8%8D%E5%BD%93/" >
+            
+                <span>PHP-Audit-Day09-str-replace-函数过滤不当</span>
+        </a>
+        <div class="abstract-content">
+            函数学习
+ str_replace ：(PHP 4, PHP 5, PHP 7)
+功能 ：子字符串替换
+定义 ： mixed str_replace ( mixed $search , mixed $replace , mixed $subject [, int &amp;$count ] ) 
+该函数返回一个字符串或者数组。如下：
+str_replace(字符串1，字符串2，字符串3)：将字符串3中出现的所有字符串1换成字符串2。
+str_replace(数组1，字符串1，字符串2)：将字符串2中出现的所有数组1中的值，换成字符串1。
+str_replace(数组1，数组2，字符串1)...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/03</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/11/01/%E6%9F%A5%E6%89%BE-spring-heapdump-%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87/" >
+            
+                <span>查找 spring heapdump 中的密码明文</span>
+        </a>
+        <div class="abstract-content">
+            前言最近在做项目的时候，遇到Spring框架，扫描字典发现可以访问/env较多接口，还有1G的heapdump文件。
+
+但是翻阅的时候发现一些带有敏感关键词的属性名对应的属性值都被******代替。
+
+网上搜索后发现可以通过 Eclipse Memory Analyzer来分析/heapdump文件查找对应明文密码。
+安装和使用安装比较简单，直接下载工具到本地打开就可以使用。
+
+左上角点击File –&gt; Open heap Dump导入heapdump文件，等待完成后点击Finish
+
+点击OQL后输入查询语句，点击红色感叹号进行查询。
+
+查找明文密码spring boot x11...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/11/01</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/10/16/PHP-Audit-Day08-preg-replace%E5%87%BD%E6%95%B0%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" >
+            
+                <span>PHP-Audit Day08 preg_replace函数之命令执行</span>
+        </a>
+        <div class="abstract-content">
+            函数学习
+preg_replace：(PHP 5.5)
+功能 ： 函数执行一个正则表达式的搜索和替换
+定义 ： mixed preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit = -1 [, int &amp;$count ]] )
+搜索 subject 中匹配 pattern 的部分， 如果匹配成功以 replacement 进行替换。
+
+
+$pattern 存在 /e 模式修正符，允许代码执行
+
+/e 模式修正符，是 preg_replace() ** 将 **$repla...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/10/16</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/10/14/PHP-Audit-Day07-parse-str%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" >
+            
+                <span>PHP-Audit Day07 parse_str函数缺陷</span>
+        </a>
+        <div class="abstract-content">
+            函数学习
+parse_str
+功能 ：parse_str的作用就是解析字符串并且注册成变量，它在注册变量之前不会验证当前变量是否存在，所以会直接覆盖掉当前作用域中原有的变量。
+定义 ：void parse_str( string $encoded_string [, array &amp;$result ] )
+如果 encoded_string 是 URL 传入的查询字符串（query string），则将它解析为变量并设置到当前作用域（如果提供了 result 则会设置到该数组里 ）。
+
+Demo学习12345678910111213141516171819202122232425&...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/10/14</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
     
 </div>
             
@@ -386,6 +711,10 @@ nacos 2.2.0
     </article>
     
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/tags/learn/page/2/">2</a><a class="extend next" rel="next" href="/tags/learn/page/2/">NEXT &gt;</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -467,8 +796,6 @@ nacos 2.2.0
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
     
     
     
@@ -1331,11 +1658,11 @@ nacos 2.2.0
     
         <span class="sidebar-tag-name" data-tags="Struts"><span class="iconfont-archer">&#xe606;</span>Struts</span>
     
+        <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
+    
         <span class="sidebar-tag-name" data-tags="CVE"><span class="iconfont-archer">&#xe606;</span>CVE</span>
     
         <span class="sidebar-tag-name" data-tags="Tools"><span class="iconfont-archer">&#xe606;</span>Tools</span>
-    
-        <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
     
         <span class="sidebar-tag-name" data-tags="Windows"><span class="iconfont-archer">&#xe606;</span>Windows</span>
     
@@ -1404,294 +1731,19 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Audit"><span class="iconfont-archer">&#xe60a;</span>Audit</span>
     
-        <span class="sidebar-category-name" data-categories="CVE"><span class="iconfont-archer">&#xe60a;</span>CVE</span>
-    
         <span class="sidebar-category-name" data-categories="C"><span class="iconfont-archer">&#xe60a;</span>C</span>
-    
-        <span class="sidebar-category-name" data-categories="Audit/Java"><span class="iconfont-archer">&#xe60a;</span>Audit/Java</span>
-    
-        <span class="sidebar-category-name" data-categories="CVE/POC"><span class="iconfont-archer">&#xe60a;</span>CVE/POC</span>
-    
-        <span class="sidebar-category-name" data-categories="learn"><span class="iconfont-archer">&#xe60a;</span>learn</span>
-    
-        <span class="sidebar-category-name" data-categories="Vul"><span class="iconfont-archer">&#xe60a;</span>Vul</span>
-    
-        <span class="sidebar-category-name" data-categories="Audit/PHP"><span class="iconfont-archer">&#xe60a;</span>Audit/PHP</span>
-    
-        <span class="sidebar-category-name" data-categories="CVE/EXP"><span class="iconfont-archer">&#xe60a;</span>CVE/EXP</span>
-    
-        <span class="sidebar-category-name" data-categories="Tips"><span class="iconfont-archer">&#xe60a;</span>Tips</span>
-    
-        <span class="sidebar-category-name" data-categories="内网学习"><span class="iconfont-archer">&#xe60a;</span>内网学习</span>
-    
-        <span class="sidebar-category-name" data-categories="tools"><span class="iconfont-archer">&#xe60a;</span>tools</span>
-    
-        <span class="sidebar-category-name" data-categories="bypass"><span class="iconfont-archer">&#xe60a;</span>bypass</span>
-    
-        <span class="sidebar-category-name" data-categories="POC/YAKIT"><span class="iconfont-archer">&#xe60a;</span>POC/YAKIT</span>
-    
-        <span class="sidebar-category-name" data-categories="Pentest"><span class="iconfont-archer">&#xe60a;</span>Pentest</span>
-    
-        <span class="sidebar-category-name" data-categories="0Day"><span class="iconfont-archer">&#xe60a;</span>0Day</span>
-    
-        <span class="sidebar-category-name" data-categories="mark"><span class="iconfont-archer">&#xe60a;</span>mark</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
-    </div>
-</div> 
-    <script>
-    var siteMeta = {
-        root: "/",
-        author: "S1xHcL"
-    }
-</script>
-    <!-- CDN failover -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ === 'undefined')
-        {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
-        }
-    </script>
-    <script src="/scripts/main.js"></script>
-    <!-- algolia -->
-    
-    <!-- busuanzi  -->
-    
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    <!-- CNZZ  -->
-    
-    </div>
-    <!-- async load share.js -->
-     
-    </body>
-</html>
-
-
-%AE%A1%E5%AD%A6%E4%B9%A0/" >bluecms-代码审计学习</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2021/08/12/sql%E6%B3%A8%E5%85%A5-%E5%AE%89%E5%85%A8%E7%8B%97%E7%BB%95%E8%BF%87/" >sql注入-安全狗绕过</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2021/04/24/Interview4/" >Interview4</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/23</span><a class="archive-post-title" href= "/2021/04/23/Windows%E8%AE%A4%E8%AF%81-Kerberos/" >Windows认证-Kerberos</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2021/04/08/2021-HW/" >2021-HW</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2021/04/06/Windows%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0/" >Windows认证机制学习</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/01</span><a class="archive-post-title" href= "/2021/04/01/%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E6%9D%80%E7%8C%AA%E7%9B%98getshell/" >一次简单的杀猪盘getshell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2021/03/27/Interview3/" >Interview3.md</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2021/03/27/CVE-2021-22986-POC/" >CVE-2021-22986-POC</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2021/03/24/%E5%9B%BD%E5%86%85%E6%9F%90%E7%B3%BB%E7%BB%9F%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" >国内某系统任意文件读取漏洞</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/17</span><a class="archive-post-title" href= "/2021/03/17/%E5%AF%B9%E6%9F%90%E6%A3%8B%E7%89%8C%E7%AB%99%E7%9A%84%E4%B8%80%E6%AC%A1getshell/" >对某棋牌站的一次getshell</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2021/03/13/%E9%80%9A%E8%BE%BEOA-v11-7-%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E/" >通达OA v11.7 在线用户登录漏洞</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2021/03/08/CNVD-2021-14536-POC/" >CNVD-2021-14536-POC</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2021/03/06/php-bugs/" >php_bugs</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/02</span><a class="archive-post-title" href= "/2021/03/02/Interview2/" >Interview2</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2021/02/22/C-Notes/" >C_Notes</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/CVE-2020-17518-17519%E5%A4%8D%E7%8E%B0/" >CVE-2020-17518/17519复现</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/03</span><a class="archive-post-title" href= "/2021/02/03/%E5%AF%B9%E6%9F%90BC%E7%AB%99%E7%9A%84%E4%B8%80%E6%AC%A1%E4%B8%8D%E5%AE%8C%E6%95%B4%E6%B8%97%E9%80%8F/" >对某BC站的一次不完整渗透</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2021/02/02/%E5%B8%B8%E8%A7%81CMS%E5%90%8E%E5%8F%B0%E6%94%B6%E9%9B%86/" >常见CMS后台收集</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2021/02/01/sqlmap-%E8%AE%B0%E5%BD%95/" >sqlmap 基本用法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2021/01/31/Interview/" >InterView</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/09</span><a class="archive-post-title" href= "/2019/09/09/CVE-2019-0708-%E5%A4%8D%E7%8E%B0/" >CVE-2019-0708 复现</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/08</span><a class="archive-post-title" href= "/2019/09/08/hello-world/" >Hello World</a>
-        </li>
-    
-    </div>
-  </div>
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
-    
-        <span class="sidebar-tag-name" data-tags="HW"><span class="iconfont-archer">&#xe606;</span>HW</span>
-    
-        <span class="sidebar-tag-name" data-tags="learn"><span class="iconfont-archer">&#xe606;</span>learn</span>
-    
-        <span class="sidebar-tag-name" data-tags="Struts"><span class="iconfont-archer">&#xe606;</span>Struts</span>
-    
-        <span class="sidebar-tag-name" data-tags="CVE"><span class="iconfont-archer">&#xe606;</span>CVE</span>
-    
-        <span class="sidebar-tag-name" data-tags="Tools"><span class="iconfont-archer">&#xe606;</span>Tools</span>
-    
-        <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
-    
-        <span class="sidebar-tag-name" data-tags="Windows"><span class="iconfont-archer">&#xe606;</span>Windows</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
-        <span class="sidebar-tag-name" data-tags="InterView"><span class="iconfont-archer">&#xe606;</span>InterView</span>
-    
-        <span class="sidebar-tag-name" data-tags="Learn"><span class="iconfont-archer">&#xe606;</span>Learn</span>
-    
-        <span class="sidebar-tag-name" data-tags="PHP"><span class="iconfont-archer">&#xe606;</span>PHP</span>
-    
-        <span class="sidebar-tag-name" data-tags="Audit"><span class="iconfont-archer">&#xe606;</span>Audit</span>
-    
-        <span class="sidebar-tag-name" data-tags="Pentest"><span class="iconfont-archer">&#xe606;</span>Pentest</span>
-    
-        <span class="sidebar-tag-name" data-tags="ThinkPHP"><span class="iconfont-archer">&#xe606;</span>ThinkPHP</span>
-    
-        <span class="sidebar-tag-name" data-tags="Windows认证"><span class="iconfont-archer">&#xe606;</span>Windows认证</span>
-    
-        <span class="sidebar-tag-name" data-tags="Kerberos"><span class="iconfont-archer">&#xe606;</span>Kerberos</span>
-    
-        <span class="sidebar-tag-name" data-tags="sqlmap"><span class="iconfont-archer">&#xe606;</span>sqlmap</span>
-    
-        <span class="sidebar-tag-name" data-tags="sql"><span class="iconfont-archer">&#xe606;</span>sql</span>
-    
-        <span class="sidebar-tag-name" data-tags="POC"><span class="iconfont-archer">&#xe606;</span>POC</span>
-    
-        <span class="sidebar-tag-name" data-tags="Work"><span class="iconfont-archer">&#xe606;</span>Work</span>
-    
-        <span class="sidebar-tag-name" data-tags="OA"><span class="iconfont-archer">&#xe606;</span>OA</span>
-    
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-    缺失模块。<br/>
-    1、请确保node版本大于6.2<br/>
-    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
-    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
-    3、在根目录_config.yml里添加配置：
-    <pre style="color: #787878; font-size: 0.6rem;">
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: true
-    tags: true</pre>
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-        <span class="sidebar-category-name" data-categories="POC"><span class="iconfont-archer">&#xe60a;</span>POC</span>
-    
-        <span class="sidebar-category-name" data-categories="Audit"><span class="iconfont-archer">&#xe60a;</span>Audit</span>
     
         <span class="sidebar-category-name" data-categories="CVE"><span class="iconfont-archer">&#xe60a;</span>CVE</span>
     
-        <span class="sidebar-category-name" data-categories="C"><span class="iconfont-archer">&#xe60a;</span>C</span>
+        <span class="sidebar-category-name" data-categories="Audit/PHP"><span class="iconfont-archer">&#xe60a;</span>Audit/PHP</span>
     
         <span class="sidebar-category-name" data-categories="Audit/Java"><span class="iconfont-archer">&#xe60a;</span>Audit/Java</span>
     
-        <span class="sidebar-category-name" data-categories="CVE/POC"><span class="iconfont-archer">&#xe60a;</span>CVE/POC</span>
-    
         <span class="sidebar-category-name" data-categories="learn"><span class="iconfont-archer">&#xe60a;</span>learn</span>
     
-        <span class="sidebar-category-name" data-categories="Vul"><span class="iconfont-archer">&#xe60a;</span>Vul</span>
+        <span class="sidebar-category-name" data-categories="CVE/POC"><span class="iconfont-archer">&#xe60a;</span>CVE/POC</span>
     
-        <span class="sidebar-category-name" data-categories="Audit/PHP"><span class="iconfont-archer">&#xe60a;</span>Audit/PHP</span>
+        <span class="sidebar-category-name" data-categories="Vul"><span class="iconfont-archer">&#xe60a;</span>Vul</span>
     
         <span class="sidebar-category-name" data-categories="CVE/EXP"><span class="iconfont-archer">&#xe60a;</span>CVE/EXP</span>
     
