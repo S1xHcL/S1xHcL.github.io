@@ -354,6 +354,76 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2022/04/10/PHP-Audit-Day10-%E7%A8%8B%E5%BA%8F%E6%9C%AA%E6%81%B0%E5%BD%93exit%E5%AF%BC%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" >
+            
+                <span>PHP-Audit Day10 程序未恰当exit导致的问题</span>
+        </a>
+        <div class="abstract-content">
+            函数学习
+ extract  ：(PHP 4, PHP 5, PHP 7)
+功能 ：从数组中将变量导入到当前的符号表
+定义 ： int extract ( array &amp;$array [, int $flags = EXTR_OVERWRITE [, string $prefix = NULL ]] ) 
+
+Demo学习123456789101112131415161718&lt;?phpextract($_POST);function goAway() &#123;    error_log(&quot;Hacking attempt.&quot;);    header(&#...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2022/04/03/PHP-Audit-Day09-str-replace-%E5%87%BD%E6%95%B0%E8%BF%87%E6%BB%A4%E4%B8%8D%E5%BD%93/" >
+            
+                <span>PHP-Audit-Day09-str-replace-函数过滤不当</span>
+        </a>
+        <div class="abstract-content">
+            函数学习
+ str_replace ：(PHP 4, PHP 5, PHP 7)
+功能 ：子字符串替换
+定义 ： mixed str_replace ( mixed $search , mixed $replace , mixed $subject [, int &amp;$count ] ) 
+该函数返回一个字符串或者数组。如下：
+str_replace(字符串1，字符串2，字符串3)：将字符串3中出现的所有字符串1换成字符串2。
+str_replace(数组1，字符串1，字符串2)：将字符串2中出现的所有数组1中的值，换成字符串1。
+str_replace(数组1，数组2，字符串1)...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/03</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2021/11/01/%E6%9F%A5%E6%89%BE-spring-heapdump-%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87/" >
             
                 <span>查找 spring heapdump 中的密码明文</span>
@@ -639,74 +709,6 @@ SimpleXMLElement ：(PHP 5, ...
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/10/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/10/02/PHP-Audit-Day02-filter-var-%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" >
-            
-                <span>PHP-Audit Day02 filter_var()函数缺陷</span>
-        </a>
-        <div class="abstract-content">
-            函数学习
-htmlspecialchars ：(PHP 4, PHP 5, PHP 7)
-功能 ：将特殊字符转换为 HTML 实体
-定义 ：string htmlspecialchars ( string $string [, int $flags = ENT_COMPAT | ENT_HTML401 [, string$encoding = ini_get(“default_charset”) [, bool $double_encode = TRUE ]]] )
-12345&amp; (&amp; 符号)  ===============  &amp;amp;&quot; (双引号)...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/10/02</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "learn">learn</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/10/01/PHP-Audit-Day01-in-array-%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" >
-            
-                <span>PHP-Audit Day01 in_array()函数缺陷</span>
-        </a>
-        <div class="abstract-content">
-            函数学习
-in_array ：(PHP 4, PHP 5, PHP 7)
-功能 ：检查数组中是否存在某个值
-定义 ： bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )
-在 $haystack 中搜索 $needle ，如果第三个参数 $strict 的值为 TRUE ，则 in_array() 函数会进行强检查，检查 $needle 的类型是否和 $haystack 中的相同。如果找到 $haystack ，则返回 TRUE，否则返回 FALSE。
-
-Demo学习123456789101...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/10/01</span>
             </div>
             <!-- tags  -->
             
@@ -1393,9 +1395,41 @@ Demo学习123456789101...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 44
+        Total : 46
         </div>
         <!-- search  -->
         
@@ -1405,6 +1439,20 @@ Demo学习123456789101...
     
     
     
+    
+    <div class="archive-year"> 2024 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/02</span><a class="archive-post-title" href= "/2024/06/02/ThinkPHP-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0/" >ThinkPHP 命令执行代码审计学习</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2023 </div>
     <ul class="year-list">
@@ -1430,7 +1478,12 @@ Demo学习123456789101...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2022/12/29/ThinkPHP-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" >ThinkPHP 代码审计学习记录</a>
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2022/12/29/ThinkPHP-%E6%B3%A8%E5%85%A5%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" >ThinkPHP 代码审计学习记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2022/12/29/ThinkPHP-%E6%B3%A8%E5%85%A5%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/ThinkPHP-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" >ThinkPHP 代码审计学习记录</a>
         </li>
     
     
@@ -1663,19 +1716,19 @@ Demo学习123456789101...
     
         <span class="sidebar-tag-name" data-tags="HW"><span class="iconfont-archer">&#xe606;</span>HW</span>
     
-        <span class="sidebar-tag-name" data-tags="learn"><span class="iconfont-archer">&#xe606;</span>learn</span>
-    
-        <span class="sidebar-tag-name" data-tags="Struts"><span class="iconfont-archer">&#xe606;</span>Struts</span>
-    
-        <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
-    
         <span class="sidebar-tag-name" data-tags="CVE"><span class="iconfont-archer">&#xe606;</span>CVE</span>
     
         <span class="sidebar-tag-name" data-tags="Tools"><span class="iconfont-archer">&#xe606;</span>Tools</span>
     
-        <span class="sidebar-tag-name" data-tags="Windows"><span class="iconfont-archer">&#xe606;</span>Windows</span>
+        <span class="sidebar-tag-name" data-tags="learn"><span class="iconfont-archer">&#xe606;</span>learn</span>
+    
+        <span class="sidebar-tag-name" data-tags="Struts"><span class="iconfont-archer">&#xe606;</span>Struts</span>
     
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="Windows"><span class="iconfont-archer">&#xe606;</span>Windows</span>
+    
+        <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
     
         <span class="sidebar-tag-name" data-tags="InterView"><span class="iconfont-archer">&#xe606;</span>InterView</span>
     
@@ -1685,9 +1738,13 @@ Demo学习123456789101...
     
         <span class="sidebar-tag-name" data-tags="Audit"><span class="iconfont-archer">&#xe606;</span>Audit</span>
     
+        <span class="sidebar-tag-name" data-tags="Pentest"><span class="iconfont-archer">&#xe606;</span>Pentest</span>
+    
         <span class="sidebar-tag-name" data-tags="ThinkPHP"><span class="iconfont-archer">&#xe606;</span>ThinkPHP</span>
     
-        <span class="sidebar-tag-name" data-tags="Pentest"><span class="iconfont-archer">&#xe606;</span>Pentest</span>
+        <span class="sidebar-tag-name" data-tags="RCE"><span class="iconfont-archer">&#xe606;</span>RCE</span>
+    
+        <span class="sidebar-tag-name" data-tags="Sql"><span class="iconfont-archer">&#xe606;</span>Sql</span>
     
         <span class="sidebar-tag-name" data-tags="Windows认证"><span class="iconfont-archer">&#xe606;</span>Windows认证</span>
     
@@ -1738,23 +1795,23 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="POC"><span class="iconfont-archer">&#xe60a;</span>POC</span>
     
+        <span class="sidebar-category-name" data-categories="CVE"><span class="iconfont-archer">&#xe60a;</span>CVE</span>
+    
         <span class="sidebar-category-name" data-categories="Audit"><span class="iconfont-archer">&#xe60a;</span>Audit</span>
     
-        <span class="sidebar-category-name" data-categories="C"><span class="iconfont-archer">&#xe60a;</span>C</span>
+        <span class="sidebar-category-name" data-categories="CVE/EXP"><span class="iconfont-archer">&#xe60a;</span>CVE/EXP</span>
     
-        <span class="sidebar-category-name" data-categories="CVE"><span class="iconfont-archer">&#xe60a;</span>CVE</span>
+        <span class="sidebar-category-name" data-categories="CVE/POC"><span class="iconfont-archer">&#xe60a;</span>CVE/POC</span>
+    
+        <span class="sidebar-category-name" data-categories="C"><span class="iconfont-archer">&#xe60a;</span>C</span>
     
         <span class="sidebar-category-name" data-categories="Audit/Java"><span class="iconfont-archer">&#xe60a;</span>Audit/Java</span>
     
         <span class="sidebar-category-name" data-categories="learn"><span class="iconfont-archer">&#xe60a;</span>learn</span>
     
-        <span class="sidebar-category-name" data-categories="CVE/POC"><span class="iconfont-archer">&#xe60a;</span>CVE/POC</span>
-    
-        <span class="sidebar-category-name" data-categories="Vul"><span class="iconfont-archer">&#xe60a;</span>Vul</span>
-    
         <span class="sidebar-category-name" data-categories="Audit/PHP"><span class="iconfont-archer">&#xe60a;</span>Audit/PHP</span>
     
-        <span class="sidebar-category-name" data-categories="CVE/EXP"><span class="iconfont-archer">&#xe60a;</span>CVE/EXP</span>
+        <span class="sidebar-category-name" data-categories="Vul"><span class="iconfont-archer">&#xe60a;</span>Vul</span>
     
         <span class="sidebar-category-name" data-categories="Tips"><span class="iconfont-archer">&#xe60a;</span>Tips</span>
     
